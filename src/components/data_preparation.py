@@ -28,6 +28,7 @@ class DataPreparation:
         self.configs = read_yaml(CONFIGS).data_preparation
 
         # Define configuration parameters
+        self.external_filepath = normpath(self.configs.external_path)
         self.raw_filepath = normpath(self.configs.raw_path)
         self.train_filepath = normpath(self.configs.train_path)
         self.test_filepath = normpath(self.configs.test_path)
@@ -49,15 +50,26 @@ class DataPreparation:
         try:
             # Create directory if not exist
             create_directories(
-                [dirname(self.train_filepath), dirname(self.test_filepath)]
+                [
+                    dirname(self.raw_filepath),
+                    dirname(self.train_filepath),
+                    dirname(self.test_filepath),
+                ]
             )
 
             # Read the raw dataset
-            raw_dataset = pd.read_csv(self.raw_filepath)
+            downloaded_df = pd.read_csv(self.external_filepath)
+
+            # Only keep red wine data
+            red_wine_filter = downloaded_df["color"] == "red"
+            raw_df = downloaded_df[red_wine_filter].drop(columns="color")
+
+            # Save the raw dataset
+            raw_df.to_csv(self.raw_filepath, index=False, header=True, encoding="utf-8")
 
             # Prepare training and test datasets
             train_set, test_set = train_test_split(
-                raw_dataset, test_size=self.test_size, random_state=self.random_seed
+                raw_df, test_size=self.test_size, random_state=self.random_seed
             )
 
             # Save the training datasets

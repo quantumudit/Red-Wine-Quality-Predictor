@@ -12,14 +12,14 @@ from src.components.model_prediction import ModelPrediction
 
 # Configure the Streamlit page
 st.set_page_config(
-    page_title="Wine Quality Predictor",
+    page_title="Red Wine Quality Predictor",
     page_icon="🍷",
     layout="wide",
     menu_items=None,
     initial_sidebar_state="collapsed",
 )
 
-st.title("Wine Quality Predictor")
+st.title("Red Wine Quality Predictor")
 
 # Define paths for images
 wine_image = Image.open(normpath("./resources/images/wine-image.jpg"))
@@ -31,14 +31,14 @@ col1, col2 = st.columns([0.45, 0.55], gap="medium")
 with col1:
     st.image(wine_image, use_column_width=True)
     st.write(
-        """The application employs web scraping techniques to fetch ebook details
-        from **[:blue[eBooks]](https://www.ebooks.com/)** website.
-        It then generates a downloadable CSV file for users."""
+        """The application utilizes a machine learning model
+        to assess the quality score of red wine based on a range of input features
+        """
     )
     st.write(
-        """To initiate the process, users select a category,
-        a subject, and, if available, a topic. The application then uses
-        these selections to scrape the data tailored to the user's preferences."""
+        """To obtain the desired outcome, input the appropriate values into
+        the designated field.
+        """
     )
 
 # working on col2 section
@@ -47,47 +47,46 @@ with col2:
         col_3a, col_3b = st.columns([0.5, 0.5], gap="small")
         with col_3a:
             fixed_acidity = st.number_input(
-                label="Fixed Acidity:", min_value=3.80, max_value=15.90, value=7.22
+                label="Fixed Acidity:", min_value=1.00, max_value=25.00, value=7.22
             )
             volatile_acidity = st.number_input(
-                label="Volatile Acidity:", min_value=0.08, max_value=1.58, value=0.34
+                label="Volatile Acidity:", min_value=0.01, max_value=5.00, value=0.34
             )
             citric_acid = st.number_input(
-                label="Citric Acid:", min_value=0.00, max_value=1.66, value=0.32
+                label="Citric Acid:", min_value=0.00, max_value=3.00, value=0.32
             )
             residual_sugar = st.number_input(
-                label="Residual Sugar:", min_value=0.60, max_value=65.80, value=5.44
+                label="Residual Sugar:", min_value=0.10, max_value=99.99, value=5.44
             )
             chlorides = st.number_input(
-                label="Chlorides:", min_value=0.01, max_value=0.61, value=0.06
+                label="Chlorides:", min_value=0.01, max_value=2.00, value=0.06
             )
             free_sulfur_dioxide = st.number_input(
                 label="Free Sulfur Dioxide:",
                 min_value=1.00,
-                max_value=289.00,
+                max_value=400.00,
                 value=30.53,
             )
 
         with col_3b:
             total_sulfur_dioxide = st.number_input(
                 label="Total Sulfur Dioxide:",
-                min_value=6.00,
-                max_value=440.00,
+                min_value=1.00,
+                max_value=600.00,
                 value=115.74,
             )
             density = st.number_input(
-                label="Density:", min_value=0.99, max_value=1.04, value=0.99
+                label="Density:", min_value=0.01, max_value=3.00, value=0.99
             )
             pH = st.number_input(
-                label="pH:", min_value=2.72, max_value=4.01, value=3.22
+                label="pH:", min_value=0.01, max_value=9.99, value=3.22
             )
             sulphates = st.number_input(
-                label="Sulphates:", min_value=0.22, max_value=2.00, value=0.53
+                label="Sulphates:", min_value=0.00, max_value=9.00, value=0.53
             )
             alcohol = st.number_input(
-                label="Alcohol:", min_value=8.00, max_value=14.90, value=10.49
+                label="Alcohol:", min_value=5.00, max_value=25.00, value=10.49
             )
-            color = st.selectbox("Color:", ("white", "red"))
 
         st.form_submit_button()
         user_data = [
@@ -103,7 +102,6 @@ with col2:
                 "pH": pH,
                 "sulphates": sulphates,
                 "alcohol": alcohol,
-                "color": color,
             }
         ]
         user_df = pd.DataFrame(user_data)

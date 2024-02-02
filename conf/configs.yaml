@@ -1,13 +1,15 @@
 data_ingestion:
   uci_dataset_id: 186
   download: False
-  raw_path: data/raw/wine_data.csv
+  external_path: data/external/wine_data.csv
 
 data_validation:
-  raw_path: data/raw/wine_data.csv
+  external_path: data/external/wine_data.csv
+  raw_path: data/raw/red_wine_data.csv
 
 data_preparation:
-  raw_path: data/raw/wine_data.csv
+  external_path: data/external/wine_data.csv
+  raw_path: data/raw/red_wine_data.csv
   train_path: data/train/train_data.csv
   test_path: data/test/test_data.csv
   test_size_pct: 0.2

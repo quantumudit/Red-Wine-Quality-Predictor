@@ -65,7 +65,7 @@ class DataTransformation:
         """
         # Read the configuration files
         self.configs = read_yaml(CONFIGS).data_transformation
-        self.schema = read_yaml(SCHEMA)
+        self.schema = read_yaml(SCHEMA).raw_data_schema
 
         # Feature and target column names with datatype
         self.features = self.schema.features

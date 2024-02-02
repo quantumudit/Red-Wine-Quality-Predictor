@@ -34,7 +34,7 @@ class DataIngestion:
         self.uci_data_id = self.configs.uci_dataset_id
         self.download = self.configs.download
 
-        self.output_filepath = normpath(self.configs.raw_path)
+        self.output_filepath = normpath(self.configs.external_path)
 
     @staticmethod
     def fetch_uci_dataset(uci_id: int) -> pd.DataFrame:

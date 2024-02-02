@@ -1,5 +1,5 @@
 elasticnet:
   random_seed: 42
   hyperparameters:
-    alpha: 1.0
-    l1_ratio: 0.5
+    alpha: 0.5
+    l1_ratio: 0.7
