@@ -1,0 +1,36 @@
+data_ingestion:
+  uci_dataset_id: 186
+  download: False
+  raw_path: data/raw/wine_data.csv
+
+data_validation:
+  raw_path: data/raw/wine_data.csv
+
+data_preparation:
+  raw_path: data/raw/wine_data.csv
+  train_path: data/train/train_data.csv
+  test_path: data/test/test_data.csv
+  test_size_pct: 0.2
+  random_seed: 42
+
+data_transformation:
+  train_path: data/train/train_data.csv
+  test_path: data/test/test_data.csv
+  train_array_path: data/train/train_array.npy
+  test_array_path: data/test/test_array.npy
+  preprocessor_path: models/preprocessors/preprocessor.joblib
+
+model_trainer:
+  train_array_path: data/train/train_array.npy
+  model_path: models/trained/elsaticnet_model.joblib
+
+model_evaluation:
+  train_array_path: data/train/train_array.npy
+  test_array_path: data/test/test_array.npy
+  model_path: models/trained/elsaticnet_model.joblib
+  scores_dir: models/scores/
+  predictions_dir: models/predictions/
+
+model_prediction:
+  preprocessor_path: models/preprocessors/preprocessor.joblib
+  model_path: models/trained/elsaticnet_model.joblib
