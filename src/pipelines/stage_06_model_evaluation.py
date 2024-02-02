@@ -22,7 +22,7 @@ class ModelEvaluationPipeline:
             logger.info("Model Evaluation started")
             model_eval = ModelEvaluation()
             model_eval.save_evaluation_results()
-            # model_eval.log_into_mlflow()
+            model_eval.log_into_mlflow()
             logger.info("Model evaluation completed successfully")
         except Exception as excp:
             logger.error(CustomException(excp))
